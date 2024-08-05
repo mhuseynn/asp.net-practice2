@@ -1,0 +1,35 @@
+﻿@model List<Product>
+
+<h2>All Products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Quantity</td>
+                <td>@product.Price</td>
+                <td class="d-flex gap-2">
+                    <a class="btn btn-outline-success" asp-controller="Product" asp-action="GetProductById" asp-route-id="@product.Id">Detail</a>
+                    <form asp-controller="Product" asp-action="RemoveProduct" method="post">
+                        <input type="hidden" name="id" value="@product.Id" />
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="AddProduct" class="btn btn-primary">Add New Product</a>
